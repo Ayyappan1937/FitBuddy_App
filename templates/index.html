@@ -1,182 +1,1195 @@
 {% extends "base.html" %}
 
 {% block title %}
-FitBuddy | AI Workout Generator
+FitBuddy AI | Build Your Next Level
 {% endblock %}
 
 {% block content %}
 
-<section class="home-hero">
+<style>
 
-    <div class="home-content">
+/* =========================================================
+   FITBUDDY AI — FUTURISTIC HOME PAGE
+   PROJECT 2 ONLY
+========================================================= */
 
-        <small>
-            🤖 AI POWERED FITNESS
-        </small>
+.ai-home {
+    min-height: calc(100vh - 76px);
+    position: relative;
+    overflow: hidden;
 
-        <h1>
-            Build your healthier
-            <b>future.</b>
-        </h1>
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(34, 197, 94, 0.14),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 75%,
+            rgba(6, 182, 212, 0.12),
+            transparent 30%
+        ),
+        #07100d;
 
-        <p>
-            Tell FitBuddy about yourself and
-            get a personalized 7-day workout
-            plan with nutrition guidance.
-        </p>
+    color: #f8fafc;
+}
+
+
+/* =========================================================
+   BACKGROUND EFFECTS
+========================================================= */
+
+.ai-home::before {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    top: -220px;
+    right: -180px;
+
+    border-radius: 50%;
+
+    border: 1px solid
+        rgba(34, 197, 94, 0.15);
+
+    box-shadow:
+        0 0 100px
+        rgba(34, 197, 94, 0.08);
+
+    pointer-events: none;
+}
+
+.ai-home::after {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    bottom: -250px;
+    left: -200px;
+
+    border-radius: 50%;
+
+    border: 1px solid
+        rgba(6, 182, 212, 0.12);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.ai-container {
+    width: min(
+        calc(100% - 48px),
+        1250px
+    );
+
+    margin: auto;
+
+    padding: 70px 0 90px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   TOP LABEL
+========================================================= */
+
+.ai-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 13px;
+
+    margin-bottom: 24px;
+
+    border:
+        1px solid
+        rgba(34, 197, 94, 0.28);
+
+    border-radius: 999px;
+
+    background:
+        rgba(34, 197, 94, 0.07);
+
+    color: #86efac;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+.ai-status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #4ade80;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(74, 222, 128, 0.08),
+        0 0 18px
+        rgba(74, 222, 128, 0.8);
+
+    animation:
+        aiPulse
+        2s
+        infinite;
+}
+
+
+/* =========================================================
+   HERO HEADING
+========================================================= */
+
+.ai-heading {
+    max-width: 800px;
+
+    margin-bottom: 55px;
+}
+
+.ai-heading h1 {
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(
+            3.5rem,
+            7vw,
+            7rem
+        );
+
+    line-height: 0.88;
+
+    letter-spacing: -0.075em;
+
+    font-weight: 800;
+
+    color: #f8fafc;
+}
+
+.ai-heading h1 span {
+    display: block;
+
+    color: #4ade80;
+
+    text-shadow:
+        0 0 35px
+        rgba(74, 222, 128, 0.18);
+}
+
+.ai-heading p {
+    max-width: 650px;
+
+    margin: 28px 0 0;
+
+    color: #94a3b8;
+
+    font-size: 1rem;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   DASHBOARD GRID
+========================================================= */
+
+.ai-workspace {
+    display: grid;
+
+    grid-template-columns:
+        0.75fr
+        1.35fr;
+
+    gap: 22px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   LEFT PROFILE PANEL
+========================================================= */
+
+.ai-panel {
+    background:
+        rgba(15, 23, 42, 0.72);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.13);
+
+    border-radius: 22px;
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.25);
+}
+
+.ai-profile {
+    padding: 28px;
+}
+
+.ai-panel-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.ai-panel-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.ai-panel-number {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(34, 197, 94, 0.10);
+
+    color: #4ade80;
+
+    font-size: 0.8rem;
+
+    font-weight: 800;
+}
+
+.ai-panel-title strong {
+    display: block;
+
+    color: #f8fafc;
+
+    font-size: 0.9rem;
+}
+
+.ai-panel-title span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+}
+
+.ai-panel-tag {
+    color: #64748b;
+
+    font-size: 0.68rem;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   PROFILE INPUTS
+========================================================= */
+
+.ai-input-group {
+    margin-bottom: 18px;
+}
+
+.ai-input-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #94a3b8;
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.05em;
+
+    text-transform: uppercase;
+}
+
+.ai-input-group input {
+    width: 100%;
+
+    height: 48px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    color: #f8fafc;
+
+    background:
+        rgba(2, 6, 23, 0.65);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.15);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    transition:
+        0.25s ease;
+}
+
+.ai-input-group input::placeholder {
+    color: #475569;
+}
+
+.ai-input-group input:focus {
+    border-color: #4ade80;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(74, 222, 128, 0.08),
+        0 0 20px
+        rgba(74, 222, 128, 0.06);
+}
+
+
+/* =========================================================
+   CONFIGURATION PANEL
+========================================================= */
+
+.ai-config {
+    padding: 28px;
+}
+
+.ai-config-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.ai-config-item {
+    padding: 18px;
+
+    background:
+        rgba(2, 6, 23, 0.48);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.10);
+
+    border-radius: 14px;
+
+    transition:
+        0.25s ease;
+}
+
+.ai-config-item:hover {
+    border-color:
+        rgba(74, 222, 128, 0.28);
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(2, 6, 23, 0.68);
+}
+
+.ai-config-item.full {
+    grid-column: 1 / -1;
+}
+
+.ai-config-item label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #64748b;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+.ai-config-item select {
+    width: 100%;
+
+    height: 43px;
+
+    padding: 0 10px;
+
+    color: #e2e8f0;
+
+    background:
+        #0b1512;
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.13);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.ai-config-item select:focus {
+    border-color: #4ade80;
+}
+
+
+/* =========================================================
+   GENERATE AREA
+========================================================= */
+
+.ai-generate {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 22px;
+
+    padding: 20px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 197, 94, 0.08),
+            rgba(6, 182, 212, 0.05)
+        );
+
+    border:
+        1px solid
+        rgba(74, 222, 128, 0.14);
+
+    border-radius: 16px;
+}
+
+.ai-generate-text strong {
+    display: block;
+
+    color: #f8fafc;
+
+    font-size: 0.9rem;
+}
+
+.ai-generate-text span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+}
+
+.ai-submit {
+    flex-shrink: 0;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    height: 48px;
+
+    padding: 0 21px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    color: #04110a;
+
+    background:
+        #4ade80;
+
+    font-size: 0.78rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 25px
+        rgba(74, 222, 128, 0.18);
+
+    transition:
+        0.25s ease;
+}
+
+.ai-submit:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        #86efac;
+
+    box-shadow:
+        0 0 35px
+        rgba(74, 222, 128, 0.28);
+}
+
+.ai-submit i {
+    transition:
+        0.25s ease;
+}
+
+.ai-submit:hover i {
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   BOTTOM METRICS
+========================================================= */
+
+.ai-metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 22px;
+}
+
+.ai-metric {
+    padding: 17px;
+
+    background:
+        rgba(15, 23, 42, 0.48);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.09);
+
+    border-radius: 13px;
+}
+
+.ai-metric small {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #64748b;
+
+    font-size: 0.65rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+.ai-metric strong {
+    color: #e2e8f0;
+
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes aiPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.55;
+        transform: scale(0.8);
+    }
+}
+
+@keyframes aiReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+.ai-heading {
+    animation:
+        aiReveal
+        0.65s
+        ease
+        both;
+}
+
+.ai-workspace {
+    animation:
+        aiReveal
+        0.8s
+        0.1s
+        ease
+        both;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .ai-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-container {
+        padding-top: 45px;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .ai-container {
+        width:
+            calc(100% - 28px);
+
+        padding:
+            35px 0 60px;
+    }
+
+    .ai-heading h1 {
+        font-size: 3.5rem;
+    }
+
+    .ai-config-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-config-item.full {
+        grid-column: auto;
+    }
+
+    .ai-generate {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .ai-submit {
+        justify-content: center;
+    }
+
+    .ai-metrics {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+
+
+<section class="ai-home">
+
+    <div class="ai-container">
+
+
+        <!-- STATUS -->
+
+        <div class="ai-status">
+
+            <span class="ai-status-dot"></span>
+
+            FitBuddy AI Training Engine
+            / Online
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <div class="ai-heading">
+
+            <h1>
+
+                BUILD YOUR
+
+                <span>
+                    NEXT LEVEL.
+                </span>
+
+            </h1>
+
+            <p>
+                Configure your training profile and let
+                FitBuddy AI generate a personalized workout
+                plan around your goals, experience and schedule.
+            </p>
+
+        </div>
+
+
+        <!-- WORKSPACE -->
 
         <form
-            class="grid"
             method="post"
             action="/generate-workout"
         >
 
-            <label>
-                Name
-
-                <input
-                    name="name"
-                    placeholder="Enter your name"
-                    required
-                >
-            </label>
+            <div class="ai-workspace">
 
 
-            <label>
-                User ID
+                <!-- =========================================
+                     PROFILE
+                ========================================== -->
 
-                <input
-                    name="user_id"
-                    placeholder="Enter your User ID"
-                    required
-                >
-            </label>
+                <div class="ai-panel ai-profile">
 
+                    <div class="ai-panel-header">
 
-            <label>
-                Age
+                        <div class="ai-panel-title">
 
-                <input
-                    type="number"
-                    name="age"
-                    min="13"
-                    max="100"
-                    placeholder="Age"
-                    required
-                >
-            </label>
+                            <div class="ai-panel-number">
+                                01
+                            </div>
 
+                            <div>
 
-            <label>
-                Weight (kg)
+                                <strong>
+                                    YOUR PROFILE
+                                </strong>
 
-                <input
-                    type="number"
-                    name="weight"
-                    min="20"
-                    max="400"
-                    step="0.1"
-                    placeholder="Weight"
-                    required
-                >
-            </label>
+                                <span>
+                                    Personal information
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span class="ai-panel-tag">
+                            Identity
+                        </span>
+
+                    </div>
 
 
-            <label>
-                Fitness Goal
+                    <!-- NAME -->
 
-                <select name="goal">
+                    <div class="ai-input-group">
 
-                    <option value="weight loss">
-                        Weight Loss
-                    </option>
+                        <label for="name">
+                            Name
+                        </label>
 
-                    <option value="muscle gain">
-                        Muscle Gain
-                    </option>
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            placeholder="Enter your name"
+                            autocomplete="name"
+                            required
+                        >
 
-                    <option value="general wellness">
-                        General Wellness
-                    </option>
-
-                    <option value="flexibility">
-                        Flexibility
-                    </option>
-
-                    <option value="endurance">
-                        Endurance
-                    </option>
-
-                </select>
-            </label>
+                    </div>
 
 
-            <label>
-                Workout Intensity
+                    <!-- USER ID -->
 
-                <select name="intensity">
+                    <div class="ai-input-group">
 
-                    <option value="low">
-                        Low
-                    </option>
+                        <label for="user_id">
+                            User ID
+                        </label>
 
-                    <option value="medium" selected>
-                        Medium
-                    </option>
+                        <input
+                            id="user_id"
+                            type="text"
+                            name="user_id"
+                            placeholder="Enter your User ID"
+                            required
+                        >
 
-                    <option value="high">
-                        High
-                    </option>
-
-                </select>
-            </label>
+                    </div>
 
 
-            <label>
-                Experience Level
+                    <!-- AGE -->
 
-                <select name="experience_level">
+                    <div class="ai-input-group">
 
-                    <option value="beginner">
-                        Beginner
-                    </option>
+                        <label for="age">
+                            Age
+                        </label>
 
-                    <option value="intermediate">
-                        Intermediate
-                    </option>
+                        <input
+                            id="age"
+                            type="number"
+                            name="age"
+                            min="13"
+                            max="100"
+                            placeholder="Enter your age"
+                            required
+                        >
 
-                    <option value="advanced">
-                        Advanced
-                    </option>
-
-                </select>
-            </label>
-
-
-            <label>
-                Days per Week
-
-                <select name="days_per_week">
-
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-
-                </select>
-            </label>
+                    </div>
 
 
-            <button
-                class="button"
-                type="submit"
-            >
-                💪 Generate My Plan
-            </button>
+                    <!-- WEIGHT -->
+
+                    <div class="ai-input-group">
+
+                        <label for="weight">
+                            Weight / KG
+                        </label>
+
+                        <input
+                            id="weight"
+                            type="number"
+                            name="weight"
+                            min="20"
+                            max="400"
+                            step="0.1"
+                            placeholder="Enter your weight"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================================
+                     TRAINING CONFIGURATION
+                ========================================== -->
+
+                <div class="ai-panel ai-config">
+
+                    <div class="ai-panel-header">
+
+                        <div class="ai-panel-title">
+
+                            <div class="ai-panel-number">
+                                02
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    TRAINING PARAMETERS
+                                </strong>
+
+                                <span>
+                                    Configure your AI plan
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <span class="ai-panel-tag">
+                            AI Config
+                        </span>
+
+                    </div>
+
+
+                    <div class="ai-config-grid">
+
+
+                        <!-- GOAL -->
+
+                        <div class="ai-config-item full">
+
+                            <label for="goal">
+                                Primary Fitness Goal
+                            </label>
+
+                            <select
+                                id="goal"
+                                name="goal"
+                                required
+                            >
+
+                                <option value="weight loss">
+                                    Weight Loss
+                                </option>
+
+                                <option value="muscle gain">
+                                    Muscle Gain
+                                </option>
+
+                                <option value="general wellness">
+                                    General Wellness
+                                </option>
+
+                                <option value="flexibility">
+                                    Flexibility
+                                </option>
+
+                                <option value="endurance">
+                                    Endurance
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- INTENSITY -->
+
+                        <div class="ai-config-item">
+
+                            <label for="intensity">
+                                Intensity
+                            </label>
+
+                            <select
+                                id="intensity"
+                                name="intensity"
+                                required
+                            >
+
+                                <option value="low">
+                                    Low
+                                </option>
+
+                                <option
+                                    value="medium"
+                                    selected
+                                >
+                                    Medium
+                                </option>
+
+                                <option value="high">
+                                    High
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- EXPERIENCE -->
+
+                        <div class="ai-config-item">
+
+                            <label for="experience_level">
+                                Experience
+                            </label>
+
+                            <select
+                                id="experience_level"
+                                name="experience_level"
+                                required
+                            >
+
+                                <option value="beginner">
+                                    Beginner
+                                </option>
+
+                                <option value="intermediate">
+                                    Intermediate
+                                </option>
+
+                                <option value="advanced">
+                                    Advanced
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- DAYS -->
+
+                        <div class="ai-config-item full">
+
+                            <label for="days_per_week">
+                                Training Days / Week
+                            </label>
+
+                            <select
+                                id="days_per_week"
+                                name="days_per_week"
+                                required
+                            >
+
+                                <option value="2">
+                                    2 Days
+                                </option>
+
+                                <option value="3">
+                                    3 Days
+                                </option>
+
+                                <option value="4">
+                                    4 Days
+                                </option>
+
+                                <option
+                                    value="5"
+                                    selected
+                                >
+                                    5 Days
+                                </option>
+
+                                <option value="6">
+                                    6 Days
+                                </option>
+
+                                <option value="7">
+                                    7 Days
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENERATE -->
+
+                    <div class="ai-generate">
+
+                        <div class="ai-generate-text">
+
+                            <strong>
+                                Ready to build your plan?
+                            </strong>
+
+                            <span>
+                                FitBuddy AI will analyze your profile.
+                            </span>
+
+                        </div>
+
+
+                        <button
+                            class="ai-submit"
+                            type="submit"
+                        >
+
+                            GENERATE PLAN
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </form>
+
+
+        <!-- METRICS -->
+
+        <div class="ai-metrics">
+
+            <div class="ai-metric">
+
+                <small>
+                    ENGINE
+                </small>
+
+                <strong>
+                    AI Personalization
+                </strong>
+
+            </div>
+
+
+            <div class="ai-metric">
+
+                <small>
+                    OUTPUT
+                </small>
+
+                <strong>
+                    7-Day Workout Plan
+                </strong>
+
+            </div>
+
+
+            <div class="ai-metric">
+
+                <small>
+                    GUIDANCE
+                </small>
+
+                <strong>
+                    Nutrition Included
+                </strong>
+
+            </div>
+
+        </div>
 
     </div>
 

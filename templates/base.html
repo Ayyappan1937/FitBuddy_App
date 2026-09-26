@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,98 +10,1064 @@
         content="width=device-width, initial-scale=1.0"
     >
 
+    <meta
+        name="description"
+        content="FitBuddy - AI-powered personalized fitness planning"
+    >
+
+    <meta
+        name="theme-color"
+        content="#16a34a"
+    >
+
     <title>
         {% block title %}
         FitBuddy
         {% endblock %}
     </title>
 
-    <!-- FitBuddy CSS -->
+
+    <!-- Google Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- Main CSS -->
+
     <link
         rel="stylesheet"
         href="{{ url_for('static', path='css/style.css') }}"
     >
+    <style>
+
+/* =========================================================
+   FITBUDDY AI — FUTURISTIC NAVIGATION
+   ONLY NAVBAR DESIGN
+========================================================= */
+
+.site-header {
+    position: sticky !important;
+
+    top: 0;
+
+    z-index: 1000;
+
+    padding: 12px 18px !important;
+
+    background:
+        rgba(4, 10, 8, 0.82) !important;
+
+    border-bottom:
+        1px solid
+        rgba(74, 222, 128, 0.08) !important;
+
+    backdrop-filter:
+        blur(20px) !important;
+
+    -webkit-backdrop-filter:
+        blur(20px) !important;
+
+    transition:
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease !important;
+}
+
+
+/* =========================================================
+   SCROLLED NAVBAR
+========================================================= */
+
+.site-header.header-scrolled {
+    background:
+        rgba(4, 10, 8, 0.94) !important;
+
+    border-bottom-color:
+        rgba(74, 222, 128, 0.15) !important;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, 0.28) !important;
+}
+
+
+/* =========================================================
+   NAV CONTAINER
+========================================================= */
+
+.site-header .nav-container {
+    width:
+        min(
+            calc(100% - 20px),
+            1250px
+        ) !important;
+
+    min-height: 58px;
+
+    margin-inline: auto;
+
+    padding:
+        7px 9px 7px 10px !important;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background:
+        rgba(15, 23, 42, 0.72) !important;
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.10) !important;
+
+    border-radius: 17px !important;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 0, 0, 0.22) !important;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.site-header .brand {
+    display: inline-flex !important;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-decoration: none !important;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BRAND ICON
+========================================================= */
+
+.site-header .brand-mark {
+    width: 40px !important;
+    height: 40px !important;
+
+    display: grid !important;
+
+    place-items: center;
+
+    color: #06100b !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4ade80,
+            #22d3ee
+        ) !important;
+
+    border-radius: 11px !important;
+
+    box-shadow:
+        0 0 22px
+        rgba(74, 222, 128, 0.18) !important;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease !important;
+}
+
+.site-header .brand:hover .brand-mark {
+    transform:
+        rotate(-4deg)
+        scale(1.05);
+
+    box-shadow:
+        0 0 30px
+        rgba(74, 222, 128, 0.32) !important;
+}
+
+
+/* =========================================================
+   BRAND NAME
+========================================================= */
+
+.site-header .brand-name {
+    color: #f8fafc !important;
+
+    font-family:
+        "Manrope",
+        sans-serif !important;
+
+    font-size: 1.05rem !important;
+
+    font-weight: 800 !important;
+
+    letter-spacing: -0.035em !important;
+}
+
+.site-header .brand-name span {
+    color: #4ade80 !important;
+}
+
+
+/* =========================================================
+   MAIN NAV
+========================================================= */
+
+.site-header .main-nav {
+    display: flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-left: auto;
+
+    margin-right: 8px;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.site-header .nav-link {
+    position: relative;
+
+    display: inline-flex !important;
+
+    align-items: center;
+
+    gap: 8px;
+
+    min-height: 38px;
+
+    padding:
+        0 13px !important;
+
+    color: #94a3b8 !important;
+
+    background:
+        transparent !important;
+
+    border:
+        1px solid
+        transparent !important;
+
+    border-radius: 9px !important;
+
+    font-size: 0.74rem !important;
+
+    font-weight: 700 !important;
+
+    text-decoration: none !important;
+
+    transition:
+        color 0.22s ease,
+        background 0.22s ease,
+        border-color 0.22s ease,
+        transform 0.22s ease !important;
+}
+
+
+/* =========================================================
+   NAV ICON
+========================================================= */
+
+.site-header .nav-icon {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #64748b !important;
+
+    font-size: 0.72rem;
+
+    transition:
+        color 0.22s ease,
+        transform 0.22s ease !important;
+}
+
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.site-header .nav-link:hover {
+    color: #f8fafc !important;
+
+    background:
+        rgba(74, 222, 128, 0.065) !important;
+
+    border-color:
+        rgba(74, 222, 128, 0.12) !important;
+
+    transform:
+        translateY(-1px);
+}
+
+.site-header .nav-link:hover .nav-icon {
+    color: #4ade80 !important;
+
+    transform:
+        scale(1.08);
+}
+
+
+/* =========================================================
+   ACTIVE / CURRENT-LIKE EFFECT
+========================================================= */
+
+.site-header .nav-link:focus-visible {
+    outline: none;
+
+    color: #f8fafc !important;
+
+    border-color:
+        rgba(74, 222, 128, 0.35) !important;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34, 197, 94, 0.08);
+}
+
+
+/* =========================================================
+   CTA BUTTON
+========================================================= */
+
+.site-header .nav-cta {
+    min-height: 42px;
+
+    display: inline-flex !important;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    padding:
+        0 16px !important;
+
+    color: #06100b !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4ade80,
+            #22c55e
+        ) !important;
+
+    border:
+        1px solid
+        rgba(134, 239, 172, 0.35) !important;
+
+    border-radius: 10px !important;
+
+    font-size: 0.73rem !important;
+
+    font-weight: 900 !important;
+
+    text-decoration: none !important;
+
+    box-shadow:
+        0 8px 22px
+        rgba(34, 197, 94, 0.12) !important;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease !important;
+}
+
+.site-header .nav-cta:hover {
+    color: #06100b !important;
+
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+
+    box-shadow:
+        0 12px 30px
+        rgba(34, 197, 94, 0.25) !important;
+}
+
+.site-header .nav-cta i {
+    font-size: 0.68rem;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.site-header .nav-cta:hover i {
+    transform:
+        translate(2px, -2px);
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.site-header .mobile-menu-btn {
+    width: 42px !important;
+    height: 42px !important;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding: 0 !important;
+
+    background:
+        rgba(148, 163, 184, 0.06) !important;
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.12) !important;
+
+    border-radius: 10px !important;
+
+    cursor: pointer;
+}
+
+.site-header .mobile-menu-btn span {
+    width: 17px;
+
+    height: 2px;
+
+    display: block;
+
+    background: #94a3b8 !important;
+
+    border-radius: 5px;
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease,
+        background 0.25s ease;
+}
+
+.site-header .mobile-menu-btn:hover span {
+    background: #4ade80 !important;
+}
+
+
+/* =========================================================
+   MOBILE OPEN ANIMATION
+========================================================= */
+
+.site-header .mobile-menu-btn.menu-open span:nth-child(1) {
+    transform:
+        translateY(7px)
+        rotate(45deg);
+}
+
+.site-header .mobile-menu-btn.menu-open span:nth-child(2) {
+    opacity: 0;
+}
+
+.site-header .mobile-menu-btn.menu-open span:nth-child(3) {
+    transform:
+        translateY(-7px)
+        rotate(-45deg);
+}
+
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .site-header {
+        padding:
+            9px 10px !important;
+    }
+
+    .site-header .nav-container {
+        position: relative;
+
+        width:
+            calc(100% - 4px) !important;
+
+        padding:
+            7px 8px !important;
+    }
+
+    .site-header .main-nav {
+        position: absolute;
+
+        top:
+            calc(100% + 9px);
+
+        left: 0;
+
+        right: 0;
+
+        display: none !important;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 5px;
+
+        margin: 0;
+
+        padding: 9px;
+
+        background:
+            rgba(7, 16, 13, 0.97) !important;
+
+        border:
+            1px solid
+            rgba(74, 222, 128, 0.12) !important;
+
+        border-radius: 14px;
+
+        box-shadow:
+            0 20px 50px
+            rgba(0, 0, 0, 0.4);
+
+        backdrop-filter:
+            blur(20px);
+
+        animation:
+            navDrop
+            0.25s
+            ease
+            both;
+    }
+
+    .site-header .main-nav.mobile-open {
+        display: flex !important;
+    }
+
+    .site-header .nav-link {
+        width: 100%;
+
+        justify-content: flex-start;
+
+        min-height: 44px;
+
+        padding:
+            0 13px !important;
+    }
+
+    .site-header .nav-actions {
+        margin-left: auto;
+    }
+
+    .site-header .nav-cta {
+        min-height: 40px;
+
+        padding:
+            0 12px !important;
+
+        font-size: 0.68rem !important;
+    }
+
+    .site-header .mobile-menu-btn {
+        display: flex !important;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .site-header .brand-name {
+        font-size: 0.95rem !important;
+    }
+
+    .site-header .nav-actions {
+        display: none;
+    }
+
+    .site-header .main-nav {
+        top:
+            calc(100% + 7px);
+    }
+
+}
+
+
+/* =========================================================
+   NAV DROP ANIMATION
+========================================================= */
+
+@keyframes navDrop {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-8px)
+            scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+</style>
 
 </head>
 
 
 <body>
 
-    <!-- =========================
-         NAVIGATION BAR
-    ========================== -->
 
-    <header>
+    <!-- PAGE LOADER -->
 
-        <a href="/" class="logo">
-            💪 FitBuddy
-        </a>
+    <div
+        class="page-loader"
+        id="pageLoader"
+    >
 
-        <nav>
+        <div class="loader-spinner"></div>
 
-            <a href="/">
-                🏠 Home
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <header class="site-header">
+
+        <div class="nav-container">
+
+
+            <!-- BRAND -->
+
+            <a
+                href="/"
+                class="brand"
+                aria-label="FitBuddy Home"
+            >
+
+                <span class="brand-icon">
+
+                    <i class="fa-solid fa-dumbbell"></i>
+
+                </span>
+
+
+                <span class="brand-text">
+
+                    Fit<span>Buddy</span>
+
+                </span>
+
             </a>
 
-            <a href="/feedback">
-                📝 Feedback
-            </a>
 
-            <a href="/view-all-users?token=change-this-token">
-                👥 Users
-            </a>
+            <!-- MAIN NAVIGATION -->
 
-        </nav>
+            <nav
+                class="main-nav"
+                id="mainNav"
+                aria-label="Main navigation"
+            >
+
+                <a
+                    href="/"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-house"></i>
+
+                    <span>
+                        Home
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/feedback"
+                    class="nav-link"
+                >
+
+                    <i class="fa-regular fa-message"></i>
+
+                    <span>
+                        Feedback
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="/view-all-users?token=change-this-token"
+                    class="nav-link"
+                >
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>
+                        Users
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+            <!-- NAVIGATION BUTTON -->
+
+            <div class="nav-action">
+
+                <a
+                    href="/"
+                    class="nav-cta"
+                >
+
+                    <span>
+                        Build My Plan
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+            <!-- MOBILE MENU -->
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+        </div>
 
     </header>
 
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
+    <!-- MAIN CONTENT -->
 
-    <main>
+    <main class="site-main">
+
+
+        <!-- ERROR MESSAGE -->
 
         {% if error %}
 
-        <div class="alert error">
-            {{ error }}
+        <div class="alert-wrapper">
+
+            <div class="alert alert-error">
+
+                <div class="alert-icon">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+                    <strong>
+                        Something went wrong
+                    </strong>
+
+                    <span>
+                        {{ error }}
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
 
         {% endif %}
 
+
+        <!-- SUCCESS MESSAGE -->
 
         {% if success %}
 
-        <div class="alert success">
-            {{ success }}
+        <div class="alert-wrapper">
+
+            <div class="alert alert-success">
+
+                <div class="alert-icon">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+                    <strong>
+                        You're all set!
+                    </strong>
+
+                    <span>
+                        {{ success }}
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
 
         {% endif %}
 
+
+        <!-- PAGE CONTENT -->
 
         {% block content %}
 
         {% endblock %}
 
+
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <!-- FOOTER -->
 
-    <footer>
+    <footer class="site-footer">
 
-        <p>
-            💪 FitBuddy — AI-powered fitness planning
-        </p>
+        <div class="footer-container">
 
-        <p>
-            Educational wellness support — not medical advice.
-        </p>
+
+            <div class="footer-brand">
+
+                <a
+                    href="/"
+                    class="brand footer-logo"
+                >
+
+                    <span class="brand-icon">
+
+                        <i class="fa-solid fa-dumbbell"></i>
+
+                    </span>
+
+
+                    <span class="brand-text">
+
+                        Fit<span>Buddy</span>
+
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Train smarter.
+                    Build better habits.
+                    Become stronger.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="/">
+                    Home
+                </a>
+
+                <a href="/feedback">
+                    Feedback
+                </a>
+
+                <a href="/view-all-users?token=change-this-token">
+                    Users
+                </a>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 FitBuddy
+                </span>
+
+                <span class="footer-dot">
+                    •
+                </span>
+
+                <span>
+                    AI-powered fitness planning
+                </span>
+
+                <span class="footer-dot">
+                    •
+                </span>
+
+                <span>
+                    Educational wellness support — not medical advice.
+                </span>
+
+            </div>
+
+
+        </div>
 
     </footer>
+
+
+    <!-- MOBILE NAVIGATION SCRIPT -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const menuButton =
+                    document.getElementById("mobileMenuBtn");
+
+                const navigation =
+                    document.getElementById("mainNav");
+
+
+                if (!menuButton || !navigation) {
+                    return;
+                }
+
+
+                menuButton.addEventListener(
+                    "click",
+                    function () {
+
+                        const isOpen =
+                            navigation.classList.toggle(
+                                "mobile-open"
+                            );
+
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            String(isOpen)
+                        );
+
+
+                        menuButton.innerHTML =
+                            isOpen
+                                ? '<i class="fa-solid fa-xmark"></i>'
+                                : '<i class="fa-solid fa-bars"></i>';
+
+                    }
+                );
+
+
+                navigation
+                    .querySelectorAll(".nav-link")
+                    .forEach(
+                        function (link) {
+
+                            link.addEventListener(
+                                "click",
+                                function () {
+
+                                    navigation.classList.remove(
+                                        "mobile-open"
+                                    );
+
+
+                                    menuButton.setAttribute(
+                                        "aria-expanded",
+                                        "false"
+                                    );
+
+
+                                    menuButton.innerHTML =
+                                        '<i class="fa-solid fa-bars"></i>';
+
+                                }
+                            );
+
+                        }
+                    );
+
+
+                const loader =
+                    document.getElementById("pageLoader");
+
+
+                if (loader) {
+
+                    setTimeout(
+                        function () {
+
+                            loader.classList.add(
+                                "loader-hidden"
+                            );
+
+                        },
+                        350
+                    );
+
+                }
+
+            }
+
+        );
+
+    </script>
+
 
 </body>
 

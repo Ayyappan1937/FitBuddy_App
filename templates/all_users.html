@@ -1,151 +1,1233 @@
 {% extends "base.html" %}
 
 {% block title %}
-FitBuddy | All Users
+FitBuddy AI | Admin Dashboard
 {% endblock %}
 
 {% block content %}
 
-<div class="users-page">
+<style>
 
-    <section class="users-header">
+/* =========================================================
+   FITBUDDY AI — ADMIN DASHBOARD
+========================================================= */
 
-        <small>
-            👑 ADMIN DASHBOARD
-        </small>
+.ai-admin-page {
+    min-height: calc(100vh - 76px);
 
-        <h1>
-            👥 All Users & Workout Plans
-        </h1>
+    padding: 45px 0 80px;
 
-        <p>
-            View registered users, their original workout plans,
-            feedback, and updated workout plans.
-        </p>
+    color: #f8fafc;
 
-    </section>
+    background:
+        radial-gradient(
+            circle at 8% 10%,
+            rgba(34, 197, 94, 0.11),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 92% 85%,
+            rgba(6, 182, 212, 0.09),
+            transparent 30%
+        ),
+        #07100d;
+}
+
+.ai-admin-container {
+    width: min(
+        calc(100% - 48px),
+        1250px
+    );
+
+    margin-inline: auto;
+}
 
 
-    <section class="users-table-card">
+/* =========================================================
+   HEADER
+========================================================= */
 
-        <div class="table-wrap">
+.ai-admin-header {
+    display: flex;
 
-            <table>
+    align-items: flex-end;
 
-                <thead>
+    justify-content: space-between;
 
-                    <tr>
-                        <th>User ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Weight</th>
-                        <th>Goal</th>
-                        <th>Intensity</th>
-                        <th>Original Plan</th>
-                        <th>💬 Feedback</th>
-                        <th>Updated Plan</th>
-                    </tr>
+    gap: 25px;
 
-                </thead>
+    margin-bottom: 30px;
+}
 
-                <tbody>
+.ai-admin-eyebrow {
+    display: flex;
 
-                    {% for u in users %}
+    align-items: center;
 
-                    <tr>
+    gap: 8px;
 
-                        <td>
-                            <strong>{{ u.user_id }}</strong>
-                        </td>
+    margin-bottom: 12px;
 
-                        <td>
-                            {{ u.name }}
-                        </td>
+    color: #4ade80;
 
-                        <td>
-                            {{ u.age }}
-                        </td>
+    font-size: 0.68rem;
 
-                        <td>
-                            {{ u.weight }} kg
-                        </td>
+    font-weight: 900;
 
-                        <td>
-                            {{ u.goal }}
-                        </td>
+    letter-spacing: 0.13em;
 
-                        <td>
-                            {{ u.intensity }}
-                        </td>
+    text-transform: uppercase;
+}
 
-                        <td>
-                            <pre>{{ u.original_plan }}</pre>
-                        </td>
+.ai-admin-dot {
+    width: 7px;
+    height: 7px;
 
-                        <td>
+    border-radius: 50%;
 
-                            {% if u.feedback %}
+    background: #4ade80;
 
-                            <div class="feedback-box">
+    box-shadow:
+        0 0 14px
+        rgba(74, 222, 128, 0.8);
+}
 
-                                <strong>
-                                    💬 User Feedback
-                                </strong>
+.ai-admin-header h1 {
+    margin: 0;
 
-                                <p>
-                                    {{ u.feedback }}
-                                </p>
+    color: #f8fafc;
 
-                            </div>
+    font-family:
+        "Manrope",
+        sans-serif;
 
-                            {% else %}
+    font-size:
+        clamp(
+            2.2rem,
+            5vw,
+            4rem
+        );
 
-                            <span class="no-feedback">
-                                No feedback yet
-                            </span>
+    line-height: 0.95;
 
-                            {% endif %}
+    letter-spacing: -0.06em;
+}
 
-                        </td>
+.ai-admin-header h1 span {
+    color: #4ade80;
+}
 
-                        <td>
+.ai-admin-header p {
+    max-width: 560px;
 
-                            {% if u.updated_plan %}
+    margin: 14px 0 0;
 
-                            <pre>{{ u.updated_plan }}</pre>
+    color: #64748b;
 
-                            {% else %}
+    font-size: 0.84rem;
 
-                            <span class="no-feedback">
-                                No updated plan
-                            </span>
+    line-height: 1.7;
+}
 
-                            {% endif %}
+.ai-admin-status {
+    display: inline-flex;
 
-                        </td>
+    align-items: center;
 
-                    </tr>
+    gap: 9px;
 
-                    {% else %}
+    padding: 9px 13px;
 
-                    <tr>
+    color: #86efac;
 
-                        <td colspan="9">
-                            No users found.
-                        </td>
+    background:
+        rgba(34, 197, 94, 0.07);
 
-                    </tr>
+    border:
+        1px solid
+        rgba(34, 197, 94, 0.17);
 
-                    {% endfor %}
+    border-radius: 999px;
 
-                </tbody>
+    font-size: 0.65rem;
 
-            </table>
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DASHBOARD METRICS
+========================================================= */
+
+.ai-admin-metrics {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px;
+
+    margin-bottom: 25px;
+}
+
+.ai-admin-metric {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 20px;
+
+    background:
+        rgba(15, 23, 42, 0.68);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.10);
+
+    border-radius: 16px;
+
+    backdrop-filter:
+        blur(16px);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.ai-admin-metric:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(74, 222, 128, 0.23);
+}
+
+.ai-admin-metric-icon {
+    width: 37px;
+    height: 37px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin-bottom: 15px;
+
+    color: #4ade80;
+
+    background:
+        rgba(34, 197, 94, 0.08);
+
+    border-radius: 9px;
+
+    font-size: 0.8rem;
+}
+
+.ai-admin-metric-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #64748b;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.09em;
+
+    text-transform: uppercase;
+}
+
+.ai-admin-metric-value {
+    color: #f8fafc;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 1.55rem;
+
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+}
+
+
+/* =========================================================
+   TABLE PANEL
+========================================================= */
+
+.ai-users-panel {
+    overflow: hidden;
+
+    background:
+        rgba(15, 23, 42, 0.72);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.11);
+
+    border-radius: 21px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.25);
+
+    backdrop-filter:
+        blur(18px);
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.ai-users-panel-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 23px 25px;
+
+    border-bottom:
+        1px solid
+        rgba(148, 163, 184, 0.09);
+}
+
+.ai-users-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.ai-users-heading-icon {
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #07100d;
+
+    background: #4ade80;
+
+    border-radius: 10px;
+
+    font-size: 0.82rem;
+}
+
+.ai-users-heading h2 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 1rem;
+}
+
+.ai-users-heading p {
+    margin: 3px 0 0;
+
+    color: #64748b;
+
+    font-size: 0.68rem;
+}
+
+.ai-admin-tag {
+    padding: 7px 10px;
+
+    color: #67e8f9;
+
+    background:
+        rgba(6, 182, 212, 0.07);
+
+    border:
+        1px solid
+        rgba(6, 182, 212, 0.16);
+
+    border-radius: 7px;
+
+    font-size: 0.59rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.ai-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.ai-users-table {
+    width: 100%;
+
+    min-width: 1050px;
+
+    border-collapse: collapse;
+}
+
+
+/* =========================================================
+   TABLE HEAD
+========================================================= */
+
+.ai-users-table thead {
+    background:
+        rgba(2, 6, 23, 0.35);
+}
+
+.ai-users-table th {
+    padding:
+        14px 17px;
+
+    color: #64748b;
+
+    font-size: 0.61rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.09em;
+
+    text-align: left;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.ai-users-table td {
+    padding:
+        17px;
+
+    color: #cbd5e1;
+
+    font-size: 0.76rem;
+
+    border-top:
+        1px solid
+        rgba(148, 163, 184, 0.07);
+
+    vertical-align: top;
+}
+
+.ai-users-table tbody tr {
+    transition:
+        background 0.2s ease;
+}
+
+.ai-users-table tbody tr:hover {
+    background:
+        rgba(34, 197, 94, 0.025);
+}
+
+
+/* =========================================================
+   USER CELL
+========================================================= */
+
+.ai-user-cell {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 150px;
+}
+
+.ai-user-avatar {
+    width: 35px;
+    height: 35px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    color: #07100d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4ade80,
+            #22c55e
+        );
+
+    border-radius: 9px;
+
+    font-size: 0.7rem;
+
+    font-weight: 900;
+}
+
+.ai-user-name {
+    color: #e2e8f0;
+
+    font-weight: 800;
+}
+
+.ai-user-id {
+    margin-top: 3px;
+
+    color: #475569;
+
+    font-size: 0.62rem;
+}
+
+
+/* =========================================================
+   VALUE BADGES
+========================================================= */
+
+.ai-value-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 9px;
+
+    color: #cbd5e1;
+
+    background:
+        rgba(148, 163, 184, 0.055);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.09);
+
+    border-radius: 7px;
+
+    font-size: 0.67rem;
+
+    font-weight: 700;
+}
+
+.ai-goal-badge {
+    color: #86efac;
+
+    background:
+        rgba(34, 197, 94, 0.07);
+
+    border-color:
+        rgba(34, 197, 94, 0.14);
+}
+
+.ai-intensity-badge {
+    color: #67e8f9;
+
+    background:
+        rgba(6, 182, 212, 0.07);
+
+    border-color:
+        rgba(6, 182, 212, 0.14);
+}
+
+
+/* =========================================================
+   PLAN / FEEDBACK CONTENT
+========================================================= */
+
+.ai-table-content {
+    max-width: 300px;
+
+    color: #64748b;
+
+    font-size: 0.69rem;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+.ai-no-feedback {
+    color: #475569;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   UPDATED PLAN
+========================================================= */
+
+.ai-updated-plan {
+    max-width: 300px;
+
+    padding: 11px;
+
+    color: #94a3b8;
+
+    background:
+        rgba(34, 197, 94, 0.035);
+
+    border-left:
+        2px solid
+        rgba(74, 222, 128, 0.4);
+
+    border-radius: 5px;
+
+    font-size: 0.69rem;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.ai-empty-state {
+    padding: 65px 25px;
+
+    text-align: center;
+}
+
+.ai-empty-icon {
+    width: 55px;
+    height: 55px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin:
+        0 auto 15px;
+
+    color: #475569;
+
+    background:
+        rgba(148, 163, 184, 0.05);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.08);
+
+    border-radius: 14px;
+}
+
+.ai-empty-state h3 {
+    margin: 0;
+
+    color: #cbd5e1;
+
+    font-size: 0.95rem;
+}
+
+.ai-empty-state p {
+    margin: 7px 0 0;
+
+    color: #475569;
+
+    font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+.ai-admin-header,
+.ai-admin-metric,
+.ai-users-panel {
+    animation:
+        adminReveal
+        0.55s
+        ease
+        both;
+}
+
+.ai-admin-metric:nth-child(2) {
+    animation-delay: 0.06s;
+}
+
+.ai-admin-metric:nth-child(3) {
+    animation-delay: 0.12s;
+}
+
+.ai-admin-metric:nth-child(4) {
+    animation-delay: 0.18s;
+}
+
+.ai-users-panel {
+    animation-delay: 0.22s;
+}
+
+@keyframes adminReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .ai-admin-metrics {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .ai-admin-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .ai-admin-container {
+        width:
+            calc(100% - 28px);
+    }
+
+    .ai-admin-page {
+        padding-top: 30px;
+    }
+
+    .ai-admin-metrics {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 9px;
+    }
+
+    .ai-admin-metric {
+        padding: 15px;
+    }
+
+    .ai-admin-metric-value {
+        font-size: 1.25rem;
+    }
+
+    .ai-users-panel-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 20px;
+    }
+
+}
+
+</style>
+
+
+<section class="ai-admin-page">
+
+    <div class="ai-admin-container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="ai-admin-header">
+
+            <div>
+
+                <div class="ai-admin-eyebrow">
+
+                    <span class="ai-admin-dot"></span>
+
+                    FITBUDDY AI CONTROL CENTER
+
+                </div>
+
+
+                <h1>
+
+                    User
+                    <span>Intelligence.</span>
+
+                </h1>
+
+
+                <p>
+
+                    Monitor user profiles, fitness goals,
+                    generated workout plans and feedback
+                    from the FitBuddy AI system.
+
+                </p>
+
+            </div>
+
+
+            <div class="ai-admin-status">
+
+                <span class="ai-admin-dot"></span>
+
+                SYSTEM ONLINE
+
+            </div>
 
         </div>
 
-    </section>
 
-</div>
+        <!-- =================================================
+             METRICS
+        ================================================== -->
+
+        <div class="ai-admin-metrics">
+
+
+            <div class="ai-admin-metric">
+
+                <div class="ai-admin-metric-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <span class="ai-admin-metric-label">
+                    Registered Users
+                </span>
+
+                <span class="ai-admin-metric-value">
+                    {{ users|length }}
+                </span>
+
+            </div>
+
+
+            <div class="ai-admin-metric">
+
+                <div class="ai-admin-metric-icon">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                </div>
+
+                <span class="ai-admin-metric-label">
+                    AI Profiles
+                </span>
+
+                <span class="ai-admin-metric-value">
+                    {{ users|length }}
+                </span>
+
+            </div>
+
+
+            <div class="ai-admin-metric">
+
+                <div class="ai-admin-metric-icon">
+
+                    <i class="fa-solid fa-comment-dots"></i>
+
+                </div>
+
+                <span class="ai-admin-metric-label">
+                    Feedback Data
+                </span>
+
+                <span class="ai-admin-metric-value">
+
+                    {% set feedback_count = namespace(value=0) %}
+
+                    {% for u in users %}
+
+                        {% if u.feedback %}
+
+                            {% set feedback_count.value =
+                                feedback_count.value + 1
+                            %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {{ feedback_count.value }}
+
+                </span>
+
+            </div>
+
+
+            <div class="ai-admin-metric">
+
+                <div class="ai-admin-metric-icon">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                </div>
+
+                <span class="ai-admin-metric-label">
+                    Updated Plans
+                </span>
+
+                <span class="ai-admin-metric-value">
+
+                    {% set updated_count = namespace(value=0) %}
+
+                    {% for u in users %}
+
+                        {% if u.updated_plan %}
+
+                            {% set updated_count.value =
+                                updated_count.value + 1
+                            %}
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                    {{ updated_count.value }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             USERS TABLE
+        ================================================== -->
+
+        <div class="ai-users-panel">
+
+
+            <div class="ai-users-panel-header">
+
+                <div class="ai-users-heading">
+
+                    <div class="ai-users-heading-icon">
+
+                        <i class="fa-solid fa-database"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            User Database
+                        </h2>
+
+                        <p>
+                            Fitness profiles and AI-generated data
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ai-admin-tag">
+
+                    ADMIN VIEW
+
+                </div>
+
+            </div>
+
+
+            {% if users %}
+
+
+            <div class="ai-table-wrapper">
+
+                <table class="ai-users-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                User
+                            </th>
+
+                            <th>
+                                Age
+                            </th>
+
+                            <th>
+                                Weight
+                            </th>
+
+                            <th>
+                                Goal
+                            </th>
+
+                            <th>
+                                Intensity
+                            </th>
+
+                            <th>
+                                Original Plan
+                            </th>
+
+                            <th>
+                                Feedback
+                            </th>
+
+                            <th>
+                                Updated Plan
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                    {% for u in users %}
+
+                        <tr>
+
+
+                            <!-- USER -->
+
+                            <td>
+
+                                <div class="ai-user-cell">
+
+                                    <div class="ai-user-avatar">
+
+                                        {{ u.name[:1]|upper }}
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="ai-user-name">
+
+                                            {{ u.name }}
+
+                                        </div>
+
+                                        <div class="ai-user-id">
+
+                                            ID:
+                                            {{ u.user_id }}
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- AGE -->
+
+                            <td>
+
+                                <span class="ai-value-badge">
+
+                                    {{ u.age }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- WEIGHT -->
+
+                            <td>
+
+                                <span class="ai-value-badge">
+
+                                    {{ u.weight }} kg
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- GOAL -->
+
+                            <td>
+
+                                <span
+                                    class="
+                                        ai-value-badge
+                                        ai-goal-badge
+                                    "
+                                >
+
+                                    {{ u.goal }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- INTENSITY -->
+
+                            <td>
+
+                                <span
+                                    class="
+                                        ai-value-badge
+                                        ai-intensity-badge
+                                    "
+                                >
+
+                                    {{ u.intensity }}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- ORIGINAL PLAN -->
+
+                            <td>
+
+                                <div class="ai-table-content">
+
+                                    {{ u.original_plan }}
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- FEEDBACK -->
+
+                            <td>
+
+                                {% if u.feedback %}
+
+                                    <div class="ai-table-content">
+
+                                        {{ u.feedback }}
+
+                                    </div>
+
+                                {% else %}
+
+                                    <span class="ai-no-feedback">
+
+                                        No feedback yet
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- UPDATED PLAN -->
+
+                            <td>
+
+                                {% if u.updated_plan %}
+
+                                    <div class="ai-updated-plan">
+
+                                        {{ u.updated_plan }}
+
+                                    </div>
+
+                                {% else %}
+
+                                    <span class="ai-no-feedback">
+
+                                        Not updated
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                        </tr>
+
+                    {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="ai-empty-state">
+
+                <div class="ai-empty-icon">
+
+                    <i class="fa-solid fa-user-slash"></i>
+
+                </div>
+
+                <h3>
+                    No users found
+                </h3>
+
+                <p>
+                    User records will appear here once
+                    FitBuddy starts receiving profiles.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+</section>
 
 {% endblock %}

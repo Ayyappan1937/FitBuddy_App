@@ -1,66 +1,988 @@
 {% extends "base.html" %}
 
 {% block title %}
-FitBuddy | Feedback
+FitBuddy AI | Feedback
 {% endblock %}
 
 {% block content %}
 
-<section class="card feedback-page">
+<style>
 
-    <div class="feedback-icon">
-        📝
+/* =========================================================
+   FITBUDDY AI — FEEDBACK PAGE
+========================================================= */
+
+.ai-feedback-page {
+    min-height: calc(100vh - 76px);
+
+    display: flex;
+    align-items: center;
+
+    padding: 55px 0 85px;
+
+    color: #f8fafc;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(34, 197, 94, 0.13),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(6, 182, 212, 0.11),
+            transparent 32%
+        ),
+        #07100d;
+}
+
+.ai-feedback-container {
+    width: min(
+        calc(100% - 48px),
+        1080px
+    );
+
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+========================================================= */
+
+.ai-feedback-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.9fr)
+        minmax(0, 1.25fr);
+
+    gap: 25px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   LEFT INFORMATION PANEL
+========================================================= */
+
+.ai-feedback-info {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 38px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-height: 560px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 23, 42, 0.88),
+            rgba(7, 16, 13, 0.92)
+        );
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.11);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.28);
+
+    backdrop-filter:
+        blur(20px);
+}
+
+.ai-feedback-info::before {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    top: -100px;
+    right: -90px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(34, 197, 94, 0.09);
+
+    filter: blur(30px);
+
+    pointer-events: none;
+}
+
+.ai-feedback-info::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    bottom: -100px;
+    left: -70px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(6, 182, 212, 0.07);
+
+    filter: blur(30px);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.ai-feedback-main-icon {
+    width: 62px;
+    height: 62px;
+
+    display: grid;
+
+    place-items: center;
+
+    margin-bottom: 28px;
+
+    color: #07100d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4ade80,
+            #22c55e
+        );
+
+    border-radius: 16px;
+
+    font-size: 1.35rem;
+
+    box-shadow:
+        0 0 35px
+        rgba(74, 222, 128, 0.18);
+
+    animation:
+        feedbackFloat
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   TEXT
+========================================================= */
+
+.ai-feedback-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+
+    color: #4ade80;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+
+    text-transform: uppercase;
+}
+
+.ai-feedback-status-dot {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #4ade80;
+
+    box-shadow:
+        0 0 12px
+        rgba(74, 222, 128, 0.8);
+}
+
+.ai-feedback-info h1 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(
+            2.4rem,
+            5vw,
+            4.3rem
+        );
+
+    line-height: 0.96;
+
+    letter-spacing: -0.065em;
+}
+
+.ai-feedback-info h1 span {
+    color: #4ade80;
+}
+
+.ai-feedback-description {
+    max-width: 430px;
+
+    margin: 20px 0 0;
+
+    color: #64748b;
+
+    font-size: 0.88rem;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   MINI FEATURES
+========================================================= */
+
+.ai-feedback-features {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+
+    margin-top: 35px;
+}
+
+.ai-feedback-feature {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 14px;
+
+    background:
+        rgba(148, 163, 184, 0.045);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.08);
+
+    border-radius: 10px;
+}
+
+.ai-feedback-feature-icon {
+    width: 31px;
+    height: 31px;
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    color: #4ade80;
+
+    background:
+        rgba(34, 197, 94, 0.08);
+
+    border-radius: 8px;
+
+    font-size: 0.72rem;
+}
+
+.ai-feedback-feature span {
+    color: #94a3b8;
+
+    font-size: 0.74rem;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   RIGHT FORM PANEL
+========================================================= */
+
+.ai-feedback-form-panel {
+    padding: 34px;
+
+    background:
+        rgba(15, 23, 42, 0.74);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.11);
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(0, 0, 0, 0.25);
+
+    backdrop-filter:
+        blur(20px);
+}
+
+
+/* =========================================================
+   FORM HEADER
+========================================================= */
+
+.ai-form-header {
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+
+    padding-bottom: 22px;
+
+    border-bottom:
+        1px solid
+        rgba(148, 163, 184, 0.09);
+}
+
+.ai-form-header h2 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 1.35rem;
+
+    letter-spacing: -0.035em;
+}
+
+.ai-form-header p {
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+    font-size: 0.76rem;
+
+    line-height: 1.5;
+}
+
+.ai-form-tag {
+    padding: 7px 10px;
+
+    color: #67e8f9;
+
+    background:
+        rgba(6, 182, 212, 0.07);
+
+    border:
+        1px solid
+        rgba(6, 182, 212, 0.16);
+
+    border-radius: 7px;
+
+    font-size: 0.6rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   USER ID FIELD
+========================================================= */
+
+.ai-field {
+    margin-bottom: 22px;
+}
+
+.ai-field label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 9px;
+
+    color: #cbd5e1;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.025em;
+}
+
+.ai-field label i {
+    color: #4ade80;
+
+    font-size: 0.68rem;
+}
+
+.ai-field input,
+.ai-field textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    color: #e2e8f0;
+
+    background:
+        rgba(2, 6, 23, 0.52);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.13);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.ai-field input {
+    min-height: 48px;
+
+    padding:
+        0 14px;
+}
+
+.ai-field textarea {
+    min-height: 220px;
+
+    padding: 14px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+.ai-field input::placeholder,
+.ai-field textarea::placeholder {
+    color: #475569;
+}
+
+.ai-field input:focus,
+.ai-field textarea:focus {
+    background:
+        rgba(2, 6, 23, 0.7);
+
+    border-color:
+        rgba(74, 222, 128, 0.55);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34, 197, 94, 0.07),
+        0 0 25px
+        rgba(34, 197, 94, 0.06);
+}
+
+
+/* =========================================================
+   CHARACTER / HELPER TEXT
+========================================================= */
+
+.ai-feedback-helper {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 9px;
+
+    color: #475569;
+
+    font-size: 0.66rem;
+}
+
+.ai-feedback-helper i {
+    color: #06b6d4;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.ai-submit-button {
+    width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 6px;
+
+    color: #07100d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4ade80,
+            #22c55e
+        );
+
+    border: none;
+
+    border-radius: 11px;
+
+    font-size: 0.8rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.01em;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px
+        rgba(34, 197, 94, 0.13);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.ai-submit-button:hover {
+    transform:
+        translateY(-2px);
+
+    filter:
+        brightness(1.08);
+
+    box-shadow:
+        0 17px 35px
+        rgba(34, 197, 94, 0.20);
+}
+
+.ai-submit-button:active {
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.ai-back-link {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 17px;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease;
+}
+
+.ai-back-link:hover {
+    color: #4ade80;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+.ai-feedback-info,
+.ai-feedback-form-panel {
+    animation:
+        feedbackReveal
+        0.6s
+        ease
+        both;
+}
+
+.ai-feedback-form-panel {
+    animation-delay: 0.08s;
+}
+
+@keyframes feedbackReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes feedbackFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-5px);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .ai-feedback-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-feedback-info {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .ai-feedback-container {
+        width:
+            calc(100% - 28px);
+    }
+
+    .ai-feedback-page {
+        padding-top: 35px;
+    }
+
+    .ai-feedback-info,
+    .ai-feedback-form-panel {
+        padding: 24px;
+    }
+
+    .ai-form-header {
+        flex-direction: column;
+    }
+
+    .ai-feedback-info h1 {
+        font-size: 2.8rem;
+    }
+
+}
+
+</style>
+
+
+<section class="ai-feedback-page">
+
+    <div class="ai-feedback-container">
+
+        <div class="ai-feedback-grid">
+
+
+            <!-- =================================================
+                 LEFT SIDE
+            ================================================== -->
+
+            <div class="ai-feedback-info">
+
+                <div>
+
+                    <div class="ai-feedback-main-icon">
+
+                        <i class="fa-solid fa-message"></i>
+
+                    </div>
+
+
+                    <div class="ai-feedback-eyebrow">
+
+                        <span
+                            class="ai-feedback-status-dot"
+                        ></span>
+
+                        FITBUDDY AI FEEDBACK
+
+                    </div>
+
+
+                    <h1>
+
+                        Help us make
+                        <span>you better.</span>
+
+                    </h1>
+
+
+                    <p class="ai-feedback-description">
+
+                        Your feedback helps FitBuddy understand
+                        your training experience and improve your
+                        personalized workout recommendations.
+
+                    </p>
+
+
+                    <div class="ai-feedback-features">
+
+
+                        <div class="ai-feedback-feature">
+
+                            <div class="ai-feedback-feature-icon">
+
+                                <i class="fa-solid fa-bullseye"></i>
+
+                            </div>
+
+                            <span>
+                                Tell us how well your workout
+                                matched your fitness goal.
+                            </span>
+
+                        </div>
+
+
+                        <div class="ai-feedback-feature">
+
+                            <div class="ai-feedback-feature-icon">
+
+                                <i class="fa-solid fa-sliders"></i>
+
+                            </div>
+
+                            <span>
+                                Share what could be adjusted
+                                or improved.
+                            </span>
+
+                        </div>
+
+
+                        <div class="ai-feedback-feature">
+
+                            <div class="ai-feedback-feature-icon">
+
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                            </div>
+
+                            <span>
+                                Your feedback can help refine
+                                future AI-generated plans.
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="ai-feedback-helper">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your feedback is submitted securely.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT SIDE — FORM
+            ================================================== -->
+
+            <div class="ai-feedback-form-panel">
+
+
+                <div class="ai-form-header">
+
+                    <div>
+
+                        <h2>
+                            Submit your feedback
+                        </h2>
+
+                        <p>
+                            Help the AI training engine learn
+                            from your experience.
+                        </p>
+
+                    </div>
+
+
+                    <div class="ai-form-tag">
+
+                        AI LEARNING LOOP
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMPORTANT:
+                     BACKEND ROUTE + FIELD NAMES PRESERVED
+                -->
+
+                <form
+                    action="/submit-feedback"
+                    method="POST"
+                >
+
+
+                    <!-- USER ID -->
+
+                    <div class="ai-field">
+
+                        <label for="user_id">
+
+                            <i class="fa-solid fa-fingerprint"></i>
+
+                            User ID
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="user_id"
+                            name="user_id"
+                            placeholder="Enter your User ID"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- FEEDBACK -->
+
+                    <div class="ai-field">
+
+                        <label for="feedback">
+
+                            <i class="fa-solid fa-comment-dots"></i>
+
+                            Your Feedback
+
+                        </label>
+
+
+                        <textarea
+                            id="feedback"
+                            name="feedback"
+                            placeholder="Tell us about your workout experience..."
+                            required
+                        ></textarea>
+
+
+                        <div class="ai-feedback-helper">
+
+                            <i class="fa-solid fa-lightbulb"></i>
+
+                            Mention what you liked,
+                            what felt difficult, or what
+                            you would like to change.
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="ai-submit-button"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        Submit Feedback
+
+                    </button>
+
+
+                </form>
+
+
+                <a
+                    href="/"
+                    class="ai-back-link"
+                >
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to FitBuddy AI
+
+                </a>
+
+
+            </div>
+
+        </div>
+
     </div>
-
-    <h1>
-        Share Your Feedback
-    </h1>
-
-    <p class="subtitle">
-        Help us improve your personalized workout plan.
-        Tell FitBuddy what feels too easy, too difficult,
-        or what you would like to change.
-    </p>
-
-
-    <form
-    class="feedback-form"
-    method="post"
-    action="/submit-feedback"
-    >
-
-        <label>
-            Your Unique User ID
-
-            <input
-                type="text"
-                name="user_id"
-                placeholder="Enter the same User ID used to generate your plan"
-                required
-            >
-        </label>
-
-
-        <label>
-            Your Feedback
-
-            <textarea
-                name="feedback"
-                rows="7"
-                placeholder="Let us know how we can improve your plan..."
-                required
-            ></textarea>
-        </label>
-
-
-        <button
-            class="button"
-            type="submit"
-        >
-            🚀 Submit Feedback
-        </button>
-
-    </form>
 
 </section>
 

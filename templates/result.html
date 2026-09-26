@@ -1,149 +1,1070 @@
 {% extends "base.html" %}
 
 {% block title %}
-FitBuddy | Your Plan
+FitBuddy AI | Your Workout Plan
 {% endblock %}
-
 
 {% block content %}
 
-<section class="card">
+<style>
 
-    <small>
-        YOUR PERSONALIZED PLAN
-    </small>
+/* =========================================================
+   FITBUDDY AI — RESULT DASHBOARD
+========================================================= */
 
-    <h1>
-        Welcome, {{ record.name }} 👋
-    </h1>
+.ai-result-page {
+    min-height: calc(100vh - 76px);
+
+    padding: 55px 0 90px;
+
+    color: #f8fafc;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(34, 197, 94, 0.12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(6, 182, 212, 0.10),
+            transparent 32%
+        ),
+        #07100d;
+}
 
 
-    <div class="profile">
+/* =========================================================
+   CONTAINER
+========================================================= */
 
-        <div>
-            User ID
-            <strong>
-                {{ record.user_id }}
-            </strong>
+.ai-result-container {
+    width: min(
+        calc(100% - 48px),
+        1200px
+    );
+
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.ai-result-header {
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+}
+
+.ai-result-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+
+    color: #4ade80;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+
+    text-transform: uppercase;
+}
+
+.ai-result-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #4ade80;
+
+    box-shadow:
+        0 0 14px
+        rgba(74, 222, 128, 0.8);
+}
+
+.ai-result-header h1 {
+    margin: 0;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:
+        clamp(
+            2.4rem,
+            5vw,
+            4.5rem
+        );
+
+    line-height: 0.95;
+
+    letter-spacing: -0.06em;
+
+    color: #f8fafc;
+}
+
+.ai-result-header h1 span {
+    color: #4ade80;
+}
+
+.ai-result-header p {
+    max-width: 600px;
+
+    margin: 15px 0 0;
+
+    color: #64748b;
+
+    font-size: 0.92rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   UPDATED BADGE
+========================================================= */
+
+.ai-updated-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    color: #86efac;
+
+    background:
+        rgba(34, 197, 94, 0.08);
+
+    border:
+        1px solid
+        rgba(34, 197, 94, 0.22);
+
+    border-radius: 999px;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   USER OVERVIEW
+========================================================= */
+
+.ai-user-overview {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+.ai-stat {
+    padding: 18px;
+
+    background:
+        rgba(15, 23, 42, 0.66);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.10);
+
+    border-radius: 14px;
+
+    backdrop-filter:
+        blur(15px);
+
+    transition:
+        0.25s ease;
+}
+
+.ai-stat:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        rgba(74, 222, 128, 0.25);
+}
+
+.ai-stat-label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #64748b;
+
+    font-size: 0.64rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+.ai-stat-value {
+    color: #e2e8f0;
+
+    font-size: 0.9rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MAIN CONTENT GRID
+========================================================= */
+
+.ai-result-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(280px, 0.7fr);
+
+    gap: 22px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   MAIN PLAN CARD
+========================================================= */
+
+.ai-plan-panel {
+    padding: 28px;
+
+    background:
+        rgba(15, 23, 42, 0.72);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.12);
+
+    border-radius: 22px;
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.25);
+}
+
+.ai-panel-top {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 25px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        rgba(148, 163, 184, 0.09);
+}
+
+.ai-panel-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.ai-panel-icon {
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #07100d;
+
+    background: #4ade80;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 0 25px
+        rgba(74, 222, 128, 0.15);
+}
+
+.ai-panel-heading h2 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 1.15rem;
+
+    letter-spacing: -0.025em;
+}
+
+.ai-panel-heading span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 0.72rem;
+}
+
+.ai-ai-tag {
+    padding: 7px 10px;
+
+    color: #67e8f9;
+
+    background:
+        rgba(6, 182, 212, 0.08);
+
+    border:
+        1px solid
+        rgba(6, 182, 212, 0.18);
+
+    border-radius: 7px;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   WORKOUT PLAN CONTENT
+========================================================= */
+
+.ai-workout-content {
+    color: #cbd5e1;
+
+    font-size: 0.91rem;
+
+    line-height: 1.8;
+
+    white-space: pre-wrap;
+}
+
+.ai-workout-content strong {
+    color: #f8fafc;
+}
+
+
+/* =========================================================
+   NUTRITION CARD
+========================================================= */
+
+.ai-nutrition {
+    margin-top: 22px;
+
+    padding: 23px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 197, 94, 0.09),
+            rgba(6, 182, 212, 0.04)
+        );
+
+    border:
+        1px solid
+        rgba(74, 222, 128, 0.14);
+
+    border-radius: 17px;
+}
+
+.ai-nutrition-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin-bottom: 12px;
+}
+
+.ai-nutrition-icon {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #4ade80;
+
+    background:
+        rgba(34, 197, 94, 0.10);
+
+    border-radius: 9px;
+}
+
+.ai-nutrition h3 {
+    margin: 0;
+
+    color: #f8fafc;
+
+    font-size: 0.95rem;
+}
+
+.ai-nutrition p {
+    margin: 0;
+
+    color: #94a3b8;
+
+    font-size: 0.83rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SIDE PANEL
+========================================================= */
+
+.ai-side-panel {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+.ai-side-card {
+    padding: 22px;
+
+    background:
+        rgba(15, 23, 42, 0.66);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.10);
+
+    border-radius: 18px;
+
+    backdrop-filter:
+        blur(15px);
+}
+
+.ai-side-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #64748b;
+
+    font-size: 0.64rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+.ai-side-card h3 {
+    margin: 0 0 10px;
+
+    color: #f8fafc;
+
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size: 1.05rem;
+}
+
+.ai-side-card p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 0.78rem;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   GOAL DISPLAY
+========================================================= */
+
+.ai-goal-display {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 16px;
+
+    padding: 14px;
+
+    background:
+        rgba(2, 6, 23, 0.45);
+
+    border-radius: 11px;
+}
+
+.ai-goal-icon {
+    width: 36px;
+    height: 36px;
+
+    display: grid;
+
+    place-items: center;
+
+    color: #4ade80;
+
+    background:
+        rgba(34, 197, 94, 0.09);
+
+    border-radius: 9px;
+}
+
+.ai-goal-display span {
+    color: #cbd5e1;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    text-transform: capitalize;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.ai-actions {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    margin-top: 18px;
+}
+
+.ai-action {
+    width: 100%;
+
+    min-height: 45px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    border-radius: 9px;
+
+    font-size: 0.76rem;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    transition:
+        0.25s ease;
+}
+
+.ai-action-primary {
+    color: #07100d;
+
+    background: #4ade80;
+}
+
+.ai-action-primary:hover {
+    background: #86efac;
+
+    transform:
+        translateY(-2px);
+}
+
+.ai-action-secondary {
+    color: #cbd5e1;
+
+    background:
+        rgba(148, 163, 184, 0.06);
+
+    border:
+        1px solid
+        rgba(148, 163, 184, 0.12);
+}
+
+.ai-action-secondary:hover {
+    color: #4ade80;
+
+    border-color:
+        rgba(74, 222, 128, 0.25);
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+.ai-result-header,
+.ai-user-overview,
+.ai-plan-panel,
+.ai-side-card {
+    animation:
+        resultReveal
+        0.55s
+        ease
+        both;
+}
+
+.ai-user-overview {
+    animation-delay: 0.08s;
+}
+
+.ai-plan-panel {
+    animation-delay: 0.15s;
+}
+
+.ai-side-card {
+    animation-delay: 0.2s;
+}
+
+@keyframes resultReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1000px) {
+
+    .ai-user-overview {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+    .ai-result-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .ai-result-container {
+        width:
+            calc(100% - 28px);
+    }
+
+    .ai-result-page {
+        padding-top: 35px;
+    }
+
+    .ai-result-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .ai-user-overview {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .ai-plan-panel {
+        padding: 20px;
+    }
+
+    .ai-panel-top {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+}
+
+</style>
+
+
+<section class="ai-result-page">
+
+    <div class="ai-result-container">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="ai-result-header">
+
+            <div>
+
+                <div class="ai-result-eyebrow">
+
+                    <span class="ai-result-dot"></span>
+
+                    AI ENGINE COMPLETE
+
+                </div>
+
+
+                <h1>
+
+                    Your plan is
+                    <span>ready.</span>
+
+                </h1>
+
+
+                <p>
+
+                    FitBuddy AI has generated a personalized
+                    training plan based on your profile,
+                    fitness goal and training preferences.
+
+                </p>
+
+            </div>
+
+
+            {% if is_updated %}
+
+            <div class="ai-updated-badge">
+
+                <i class="fa-solid fa-arrows-rotate"></i>
+
+                PLAN UPDATED
+
+            </div>
+
+            {% endif %}
+
         </div>
 
 
-        <div>
-            Age
-            <strong>
-                {{ record.age }}
-            </strong>
+        <!-- =================================================
+             USER STATS
+        ================================================== -->
+
+        <div class="ai-user-overview">
+
+
+            <div class="ai-stat">
+
+                <span class="ai-stat-label">
+                    Athlete
+                </span>
+
+                <span class="ai-stat-value">
+                    {{ record.name }}
+                </span>
+
+            </div>
+
+
+            <div class="ai-stat">
+
+                <span class="ai-stat-label">
+                    User ID
+                </span>
+
+                <span class="ai-stat-value">
+                    {{ record.user_id }}
+                </span>
+
+            </div>
+
+
+            <div class="ai-stat">
+
+                <span class="ai-stat-label">
+                    Age
+                </span>
+
+                <span class="ai-stat-value">
+                    {{ record.age }}
+                </span>
+
+            </div>
+
+
+            <div class="ai-stat">
+
+                <span class="ai-stat-label">
+                    Weight
+                </span>
+
+                <span class="ai-stat-value">
+                    {{ record.weight }} kg
+                </span>
+
+            </div>
+
+
+            <div class="ai-stat">
+
+                <span class="ai-stat-label">
+                    Intensity
+                </span>
+
+                <span class="ai-stat-value">
+                    {{ record.intensity }}
+                </span>
+
+            </div>
+
         </div>
 
 
-        <div>
-            Weight
-            <strong>
-                {{ record.weight }} kg
-            </strong>
-        </div>
+        <!-- =================================================
+             MAIN RESULT
+        ================================================== -->
+
+        <div class="ai-result-grid">
 
 
-        <div>
-            Goal
-            <strong>
-                {{ record.goal }}
-            </strong>
-        </div>
+            <!-- =============================================
+                 WORKOUT PLAN
+            ============================================== -->
+
+            <div>
+
+                <div class="ai-plan-panel">
+
+                    <div class="ai-panel-top">
+
+                        <div class="ai-panel-heading">
+
+                            <div class="ai-panel-icon">
+
+                                <i class="fa-solid fa-dumbbell"></i>
+
+                            </div>
+
+                            <div>
+
+                                <h2>
+                                    Personalized Workout
+                                </h2>
+
+                                <span>
+                                    AI-generated training plan
+                                </span>
+
+                            </div>
+
+                        </div>
 
 
-        <div>
-            Intensity
-            <strong>
-                {{ record.intensity }}
-            </strong>
+                        <div class="ai-ai-tag">
+
+                            <i class="fa-solid fa-microchip"></i>
+
+                            AI GENERATED
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="ai-workout-content">
+
+                        {{ workout_plan }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- NUTRITION -->
+
+                <div class="ai-nutrition">
+
+                    <div class="ai-nutrition-header">
+
+                        <div class="ai-nutrition-icon">
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                        </div>
+
+                        <h3>
+                            Nutrition Guidance
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+
+                        {{ record.nutrition_tip }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 SIDE INFORMATION
+            ============================================== -->
+
+            <aside class="ai-side-panel">
+
+
+                <div class="ai-side-card">
+
+                    <span class="ai-side-label">
+                        Training Objective
+                    </span>
+
+                    <h3>
+                        Your Goal
+                    </h3>
+
+
+                    <div class="ai-goal-display">
+
+                        <div class="ai-goal-icon">
+
+                            <i class="fa-solid fa-bullseye"></i>
+
+                        </div>
+
+                        <span>
+                            {{ record.goal }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ai-side-card">
+
+                    <span class="ai-side-label">
+                        Training Intensity
+                    </span>
+
+                    <h3>
+                        {{ record.intensity }}
+                    </h3>
+
+                    <p>
+                        Your workout intensity has been
+                        incorporated into the generated plan.
+                    </p>
+
+                </div>
+
+
+                <div class="ai-side-card">
+
+                    <span class="ai-side-label">
+                        Next Step
+                    </span>
+
+                    <h3>
+                        Keep moving.
+                    </h3>
+
+                    <p>
+                        Follow your plan consistently and
+                        use feedback to refine your training
+                        experience.
+                    </p>
+
+
+                    <div class="ai-actions">
+
+                        <a
+                            href="/feedback"
+                            class="ai-action ai-action-primary"
+                        >
+
+                            <i class="fa-regular fa-message"></i>
+
+                            Give Feedback
+
+                        </a>
+
+
+                        <a
+                            href="/"
+                            class="ai-action ai-action-secondary"
+                        >
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Create Another Plan
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
         </div>
 
     </div>
 
 </section>
-
-
-<section class="card">
-
-    <h2>
-
-        🏃 7-day workout plan
-
-        {% if is_updated %}
-
-        <em>
-            Updated
-        </em>
-
-        {% endif %}
-
-    </h2>
-
-
-    <pre>
-{{ workout_plan }}
-    </pre>
-
-</section>
-
-
-<section class="card">
-
-    <h2>
-        💡 Nutrition / recovery tip
-    </h2>
-
-    <p>
-        {{ record.nutrition_tip }}
-    </p>
-
-</section>
-
-
-<section class="card">
-
-    <h2>
-        🔁 Refine your plan
-    </h2>
-
-
-    <form
-        method="post"
-        action="/submit-feedback"
-    >
-
-        <input
-            type="hidden"
-            name="user_id"
-            value="{{ record.user_id }}"
-        >
-
-
-        <textarea
-            name="feedback"
-            rows="5"
-            required
-            placeholder="Add more cardio, reduce intensity, include another rest day..."
-        ></textarea>
-
-
-        <button
-            class="button"
-        >
-            Update plan →
-        </button>
-
-    </form>
-
-</section>
-
-
-<a
-    class="button secondary"
-    href="/"
->
-    Create another plan
-</a>
 
 {% endblock %}
