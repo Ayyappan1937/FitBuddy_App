@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}
+FitBuddy | Your Plan
+{% endblock %}
+
+
+{% block content %}
+
+<section class="card">
+
+    <small>
+        YOUR PERSONALIZED PLAN
+    </small>
+
+    <h1>
+        Welcome, {{ record.name }} 👋
+    </h1>
+
+
+    <div class="profile">
+
+        <div>
+            User ID
+            <strong>
+                {{ record.user_id }}
+            </strong>
+        </div>
+
+
+        <div>
+            Age
+            <strong>
+                {{ record.age }}
+            </strong>
+        </div>
+
+
+        <div>
+            Weight
+            <strong>
+                {{ record.weight }} kg
+            </strong>
+        </div>
+
+
+        <div>
+            Goal
+            <strong>
+                {{ record.goal }}
+            </strong>
+        </div>
+
+
+        <div>
+            Intensity
+            <strong>
+                {{ record.intensity }}
+            </strong>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+
+        🏃 7-day workout plan
+
+        {% if is_updated %}
+
+        <em>
+            Updated
+        </em>
+
+        {% endif %}
+
+    </h2>
+
+
+    <pre>
+{{ workout_plan }}
+    </pre>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+        💡 Nutrition / recovery tip
+    </h2>
+
+    <p>
+        {{ record.nutrition_tip }}
+    </p>
+
+</section>
+
+
+<section class="card">
+
+    <h2>
+        🔁 Refine your plan
+    </h2>
+
+
+    <form
+        method="post"
+        action="/submit-feedback"
+    >
+
+        <input
+            type="hidden"
+            name="user_id"
+            value="{{ record.user_id }}"
+        >
+
+
+        <textarea
+            name="feedback"
+            rows="5"
+            required
+            placeholder="Add more cardio, reduce intensity, include another rest day..."
+        ></textarea>
+
+
+        <button
+            class="button"
+        >
+            Update plan →
+        </button>
+
+    </form>
+
+</section>
+
+
+<a
+    class="button secondary"
+    href="/"
+>
+    Create another plan
+</a>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+FitBuddy | Feedback
+{% endblock %}
+
+{% block content %}
+
+<section class="card feedback-page">
+
+    <div class="feedback-icon">
+        📝
+    </div>
+
+    <h1>
+        Share Your Feedback
+    </h1>
+
+    <p class="subtitle">
+        Help us improve your personalized workout plan.
+        Tell FitBuddy what feels too easy, too difficult,
+        or what you would like to change.
+    </p>
+
+
+    <form
+    class="feedback-form"
+    method="post"
+    action="/submit-feedback"
+    >
+
+        <label>
+            Your Unique User ID
+
+            <input
+                type="text"
+                name="user_id"
+                placeholder="Enter the same User ID used to generate your plan"
+                required
+            >
+        </label>
+
+
+        <label>
+            Your Feedback
+
+            <textarea
+                name="feedback"
+                rows="7"
+                placeholder="Let us know how we can improve your plan..."
+                required
+            ></textarea>
+        </label>
+
+
+        <button
+            class="button"
+            type="submit"
+        >
+            🚀 Submit Feedback
+        </button>
+
+    </form>
+
+</section>
+
+{% endblock %}

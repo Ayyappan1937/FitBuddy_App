@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}
+FitBuddy | AI Workout Generator
+{% endblock %}
+
+{% block content %}
+
+<section class="home-hero">
+
+    <div class="home-content">
+
+        <small>
+            🤖 AI POWERED FITNESS
+        </small>
+
+        <h1>
+            Build your healthier
+            <b>future.</b>
+        </h1>
+
+        <p>
+            Tell FitBuddy about yourself and
+            get a personalized 7-day workout
+            plan with nutrition guidance.
+        </p>
+
+        <form
+            class="grid"
+            method="post"
+            action="/generate-workout"
+        >
+
+            <label>
+                Name
+
+                <input
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </label>
+
+
+            <label>
+                User ID
+
+                <input
+                    name="user_id"
+                    placeholder="Enter your User ID"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Age
+
+                <input
+                    type="number"
+                    name="age"
+                    min="13"
+                    max="100"
+                    placeholder="Age"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Weight (kg)
+
+                <input
+                    type="number"
+                    name="weight"
+                    min="20"
+                    max="400"
+                    step="0.1"
+                    placeholder="Weight"
+                    required
+                >
+            </label>
+
+
+            <label>
+                Fitness Goal
+
+                <select name="goal">
+
+                    <option value="weight loss">
+                        Weight Loss
+                    </option>
+
+                    <option value="muscle gain">
+                        Muscle Gain
+                    </option>
+
+                    <option value="general wellness">
+                        General Wellness
+                    </option>
+
+                    <option value="flexibility">
+                        Flexibility
+                    </option>
+
+                    <option value="endurance">
+                        Endurance
+                    </option>
+
+                </select>
+            </label>
+
+
+            <label>
+                Workout Intensity
+
+                <select name="intensity">
+
+                    <option value="low">
+                        Low
+                    </option>
+
+                    <option value="medium" selected>
+                        Medium
+                    </option>
+
+                    <option value="high">
+                        High
+                    </option>
+
+                </select>
+            </label>
+
+
+            <label>
+                Experience Level
+
+                <select name="experience_level">
+
+                    <option value="beginner">
+                        Beginner
+                    </option>
+
+                    <option value="intermediate">
+                        Intermediate
+                    </option>
+
+                    <option value="advanced">
+                        Advanced
+                    </option>
+
+                </select>
+            </label>
+
+
+            <label>
+                Days per Week
+
+                <select name="days_per_week">
+
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected>5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+
+                </select>
+            </label>
+
+
+            <button
+                class="button"
+                type="submit"
+            >
+                💪 Generate My Plan
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

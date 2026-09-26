@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        FitBuddy
+        {% endblock %}
+    </title>
+
+    <!-- FitBuddy CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', path='css/style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =========================
+         NAVIGATION BAR
+    ========================== -->
+
+    <header>
+
+        <a href="/" class="logo">
+            💪 FitBuddy
+        </a>
+
+        <nav>
+
+            <a href="/">
+                🏠 Home
+            </a>
+
+            <a href="/feedback">
+                📝 Feedback
+            </a>
+
+            <a href="/view-all-users?token=change-this-token">
+                👥 Users
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main>
+
+        {% if error %}
+
+        <div class="alert error">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        {% if success %}
+
+        <div class="alert success">
+            {{ success }}
+        </div>
+
+        {% endif %}
+
+
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            💪 FitBuddy — AI-powered fitness planning
+        </p>
+
+        <p>
+            Educational wellness support — not medical advice.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

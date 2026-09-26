@@ -1,0 +1,898 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    color: #172033;
+    background: #f5f8f7;
+    line-height: 1.6;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+header {
+    width: 100%;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 18px 6%;
+
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid #e5e7eb;
+}
+header a {
+    color: #172033;
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 800;
+}
+
+header span {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: min(100% - 32px, 1100px);
+    margin: 0 auto 60px;
+}
+
+/* =========================
+   HOME HERO
+========================= */
+
+.home-hero {
+    min-height: 650px;
+
+    margin: 0 -16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 20px;
+
+    background:
+    linear-gradient(
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.35)
+    ),
+    url("/static/css/Image/Image.png");
+
+    background-size: cover;
+    background-position: center;
+
+    border-radius: 0 0 32px 32px;
+}
+
+.home-content {
+    width: min(100%, 650px);
+
+    padding: 35px;
+
+    background: rgba(255,255,255,0.90);
+
+    backdrop-filter: blur(12px);
+
+    border-radius: 24px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.home-content h1 {
+    margin-top: 8px;
+
+    font-size: clamp(2rem, 5vw, 4rem);
+
+    line-height: 1.05;
+
+    color: #14213d;
+}
+
+.home-content h1 b {
+    color: #18a558;
+}
+
+.home-content p {
+    color: #526071;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+}
+
+.grid h2,
+.grid button {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    color: #526071;
+
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    background: #ffffff;
+
+    color: #172033;
+
+    border: 1px solid #d7dee8;
+
+    border-radius: 10px;
+
+    font: inherit;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #18a558;
+
+    box-shadow: 0 0 0 3px rgba(24,165,88,0.12);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.button {
+    display: inline-block;
+
+    padding: 14px 22px;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: #18a558;
+
+    color: white;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 20px rgba(24,165,88,0.25);
+}
+
+.secondary {
+    background: #172033;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 20px;
+
+    padding: 28px;
+
+    margin: 24px 0;
+
+    box-shadow: 0 8px 30px rgba(20,33,61,0.06);
+}
+
+.card h1,
+.card h2 {
+    color: #172033;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+}
+
+.profile div {
+    background: #f1f8f4;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    color: #526071;
+}
+
+.profile strong {
+    display: block;
+
+    color: #172033;
+}
+
+/* =========================
+   WORKOUT PLAN
+========================= */
+
+pre {
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+
+    background: #f5f7fa;
+
+    border: 1px solid #e3e8ef;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    line-height: 1.65;
+}
+
+/* =========================
+   FEEDBACK PAGE
+========================= */
+
+.feedback-page {
+    max-width: 750px;
+
+    margin: 70px auto;
+}
+
+.feedback-icon {
+    font-size: 2rem;
+}
+
+.feedback-page h1 {
+    margin-bottom: 8px;
+}
+
+.feedback-page .subtitle {
+    color: #64748b;
+
+    margin-bottom: 25px;
+}
+
+.feedback-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+/* =========================
+   ALERTS
+========================= */
+
+.alert {
+    margin-top: 25px;
+
+    padding: 15px 18px;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+}
+
+.error {
+    background: #fff0f1;
+
+    color: #c62828;
+}
+
+.success {
+    background: #e9f8ef;
+
+    color: #188044;
+}
+
+/* =========================
+   USERS TABLE
+========================= */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: collapse;
+
+    background: white;
+}
+
+th {
+    background: #18a558;
+
+    color: white;
+
+    padding: 14px;
+
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    vertical-align: top;
+}
+
+tr:hover td {
+    background: #f8fbf9;
+}
+
+td pre {
+    max-height: 350px;
+
+    overflow-y: auto;
+
+    font-size: 0.82rem;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    color: #64748b;
+
+    padding: 30px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid h2,
+    .grid button {
+        grid-column: auto;
+    }
+
+    .profile {
+        grid-template-columns: 1fr;
+    }
+
+    .home-hero {
+        min-height: 600px;
+
+        padding: 30px 12px;
+    }
+
+    .home-content {
+        padding: 22px;
+    }
+
+    header span {
+        display: none;
+    }
+}
+header nav {
+    display: flex;
+    gap: 18px;
+}
+
+header nav a {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #526071;
+}
+
+header nav a:hover {
+    color: #18a558;
+}
+/* =========================================================
+   FEEDBACK BOX - PERFECT ALIGNMENT
+========================================================= */
+
+.users-table-card td:nth-child(8) {
+    vertical-align: top;
+
+    padding: 18px 14px;
+
+    overflow: hidden;
+}
+
+
+.users-table-card .feedback-box {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
+    padding: 16px;
+
+    margin: 0;
+
+    background: #f0fdf4;
+
+    border-left: 4px solid #18a558;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+/* Feedback title */
+
+.users-table-card .feedback-box strong {
+    display: block;
+
+    margin: 0 0 10px;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+
+/* Feedback text */
+
+.users-table-card .feedback-box p {
+    display: block;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    color: #526071;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    white-space: normal;
+
+    overflow-wrap: anywhere;
+
+    word-break: break-word;
+}
+
+
+/* No feedback */
+
+.users-table-card .no-feedback {
+    display: block;
+
+    color: #94a3b8;
+
+    font-style: italic;
+
+    line-height: 1.5;
+}
+/* =========================================================
+   ALL USERS PAGE
+========================================================= */
+
+.users-page {
+    width: 100%;
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 28px 24px 60px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ADMIN HEADER
+========================================================= */
+
+.users-header {
+    width: 100%;
+
+    padding: 32px 34px;
+
+    margin-bottom: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 24px;
+
+    box-shadow: 0 10px 30px rgba(23, 32, 51, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+.users-header small {
+    display: block;
+
+    margin-bottom: 18px;
+
+    color: #334155;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.users-header h1 {
+    margin: 0 0 22px;
+
+    color: #172033;
+
+    font-size: 38px;
+
+    line-height: 1.2;
+}
+
+
+.users-header p {
+    margin: 0;
+
+    color: #526071;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.users-table-card {
+    width: 100%;
+
+    padding: 26px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 24px;
+
+    box-shadow: 0 10px 30px rgba(23, 32, 51, 0.06);
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.users-table-card .table-wrap {
+    width: 100%;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    border-radius: 14px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.users-table-card table {
+    width: 100%;
+
+    min-width: 1250px;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.users-table-card th {
+    padding: 17px 14px;
+
+    text-align: left;
+
+    color: #ffffff;
+
+    background: #18a558;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+.users-table-card th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+
+.users-table-card th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.users-table-card td {
+    padding: 18px 14px;
+
+    vertical-align: top;
+
+    min-width: 0;
+
+    color: #172033;
+
+    font-size: 15px;
+
+    line-height: 1.55;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    overflow-wrap: break-word;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.users-table-card th:nth-child(1),
+.users-table-card td:nth-child(1) {
+    width: 9%;
+}
+
+
+.users-table-card th:nth-child(2),
+.users-table-card td:nth-child(2) {
+    width: 8%;
+}
+
+
+.users-table-card th:nth-child(3),
+.users-table-card td:nth-child(3) {
+    width: 5%;
+}
+
+
+.users-table-card th:nth-child(4),
+.users-table-card td:nth-child(4) {
+    width: 8%;
+}
+
+
+.users-table-card th:nth-child(5),
+.users-table-card td:nth-child(5) {
+    width: 9%;
+}
+
+
+.users-table-card th:nth-child(6),
+.users-table-card td:nth-child(6) {
+    width: 8%;
+}
+
+
+.users-table-card th:nth-child(7),
+.users-table-card td:nth-child(7) {
+    width: 20%;
+}
+
+
+.users-table-card th:nth-child(8),
+.users-table-card td:nth-child(8) {
+    width: 15%;
+}
+
+
+.users-table-card th:nth-child(9),
+.users-table-card td:nth-child(9) {
+    width: 18%;
+}
+
+
+/* =========================================================
+   WORKOUT PLAN
+========================================================= */
+
+.users-table-card pre {
+    width: 100%;
+
+    max-height: 500px;
+
+    margin: 0;
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    white-space: pre-wrap;
+
+    word-break: normal;
+
+    overflow-wrap: break-word;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    color: #172033;
+
+    background: #f8fafc;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.feedback-box {
+    width: 100%;
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    background: #f0fdf4;
+
+    border-left: 4px solid #18a558;
+
+    border-radius: 12px;
+}
+
+
+.feedback-box strong {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #172033;
+}
+
+
+.feedback-box p {
+    margin: 0;
+
+    color: #526071;
+
+    line-height: 1.6;
+
+    overflow-wrap: break-word;
+}
+
+
+.no-feedback {
+    color: #94a3b8;
+
+    font-style: italic;
+}
+
+
+/* =========================================================
+   TABLE SCROLLBAR
+========================================================= */
+
+.users-table-card .table-wrap::-webkit-scrollbar {
+    height: 9px;
+}
+
+
+.users-table-card .table-wrap::-webkit-scrollbar-track {
+    background: #eef2f5;
+
+    border-radius: 10px;
+}
+
+
+.users-table-card .table-wrap::-webkit-scrollbar-thumb {
+    background: #b7c3d0;
+
+    border-radius: 10px;
+}
+.users-card td pre::-webkit-scrollbar-track {
+    background: #eef2f5;
+}
